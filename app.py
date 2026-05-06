@@ -7,10 +7,13 @@ from flask import Flask, render_template, Response
 app = Flask(__name__)
 
 # Load the trained model
-model = tf.keras.models.load_model("class.keras")
+# import keras
+# model = keras.models.load_model("class.keras")
+
+model = tf.keras.models.load_model("model.keras")
 
 # Define emotion labels based on your model's training classes
-emotion_labels = ["Angry", "Disgusted", "Fearful", "Happy", "Neutral", "Sad", "Surprised"]
+emotion_labels = ["Angry", "Disgusted", "Fearful", "Happy", "Sad", "Surprised","Neutral"]
 
 # Load Haar cascade for face detection
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
@@ -21,9 +24,9 @@ emoji_map = {
     "Disgusted": cv2.imread("emoji/disgusted.png", cv2.IMREAD_UNCHANGED),
     "Fearful": cv2.imread("emoji/fearful.png", cv2.IMREAD_UNCHANGED),
     "Happy": cv2.imread("emoji/happy.png", cv2.IMREAD_UNCHANGED),
-    "Neutral": cv2.imread("emoji/neutral.png", cv2.IMREAD_UNCHANGED),
     "Sad": cv2.imread("emoji/sad.png", cv2.IMREAD_UNCHANGED),
     "Surprised": cv2.imread("emoji/surprised.png", cv2.IMREAD_UNCHANGED),  
+    "Neutral": cv2.imread("emoji/neutral.png", cv2.IMREAD_UNCHANGED),
 }
 
 # Open webcam
@@ -31,7 +34,7 @@ camera = cv2.VideoCapture(0)
 
 def overlay_emoji_top_right(frame, emoji):
     """Overlay the emoji in the top-right corner of the frame."""
-    emoji_size = 100  # Set fixed size for emoji
+    emoji_size = 200  # Set fixed size for emoji
     emoji = cv2.resize(emoji, (emoji_size, emoji_size))
 
     # Position emoji at the top-right corner
@@ -62,7 +65,7 @@ def detect_emotion(frame):
         roi_gray = cv2.resize(roi_gray, (48, 48))  # Resize for model
         roi_gray = np.expand_dims(roi_gray, axis=-1)  # Add channel dimension
         roi_gray = np.expand_dims(roi_gray, axis=0)  # Add batch dimension
-        roi_gray = roi_gray / 255.0  # Normalize pixel values
+        
 
         # Predict emotion
         predictions = model.predict(roi_gray)
@@ -104,6 +107,13 @@ def open_camera():
 @app.route("/video_feed")
 def video_feed():
     return Response(generate_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
+
+from flask import Flask, render_template, Response, redirect
+
+@app.route("/stop_camera")
+def stop_camera():
+    camera.release()
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True)
