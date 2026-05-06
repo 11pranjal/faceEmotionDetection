@@ -5,21 +5,21 @@ from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 # Load the model from the .keras file
-model = load_model("emo_model.keras")
+model = load_model("model.keras")
 # Load Haar cascade for face detection
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
 # Define emotion labels
-emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
+emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Sad", 5: "Surprised",6:"Neutral"}
 
 # Load emoji images (Ensure these files exist in the "emojis" folder)
 emoji_map = { "Angry": cv2.imread(r"C:\Users\prizm\Downloads\emojii\angry.png", cv2.IMREAD_UNCHANGED),
     "Disgusted": cv2.imread(r"C:\Users\prizm\Downloads\emojii\disgusted.png", cv2.IMREAD_UNCHANGED),
     "Fearful": cv2.imread(r"C:\Users\prizm\Downloads\emojii\fearful.png", cv2.IMREAD_UNCHANGED),
     "Happy": cv2.imread(r"C:\Users\prizm\Downloads\emojii\happy.png", cv2.IMREAD_UNCHANGED),
-    "Neutral": cv2.imread(r"C:\Users\prizm\Downloads\emojii\neutral.png", cv2.IMREAD_UNCHANGED),
     "Sad": cv2.imread(r"C:\Users\prizm\Downloads\emojii\sad.png", cv2.IMREAD_UNCHANGED),
     "Surprised": cv2.imread(r"C:\Users\prizm\Downloads\emojii\surpriced.png", cv2.IMREAD_UNCHANGED),
+    "Neutral": cv2.imread(r"C:\Users\prizm\Downloads\emojii\neutral.png", cv2.IMREAD_UNCHANGED),
 }
 # Start webcam
 cap = cv2.VideoCapture(0)
