@@ -9,8 +9,15 @@ app = Flask(__name__)
 # Load the trained model
 # import keras
 # model = keras.models.load_model("class.keras")
+import os
+os.environ["TF_USE_LEGACY_KERAS"] = "0"  # Use Keras 3
 
-model = tf.keras.models.load_model("model.keras")
+import tensorflow as tf
+import keras
+
+model = keras.models.load_model("model.keras")
+
+# model = tf.keras.models.load_model("model.keras")
 
 # Define emotion labels based on your model's training classes
 emotion_labels = ["Angry", "Disgusted", "Fearful", "Happy", "Sad", "Surprised","Neutral"]
