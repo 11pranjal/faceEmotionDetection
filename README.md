@@ -1,20 +1,52 @@
 # Emotion Detection
 
-A real-time emotion detection application that uses computer vision and deep learning to analyze facial expressions from a webcam feed and display corresponding emojis.
+An emotion recognition system built with computer vision and deep learning. This project detects faces from a webcam stream, classifies facial expressions into seven core emotions, and overlays expressive emojis on the live video.
 
-## Features
+## Project Overview
 
-- Real-time face detection using OpenCV
-- Emotion classification using a pre-trained Keras model
-- Emoji overlay on video feed based on detected emotions
-- Web-based interface using Flask
-- Support for 7 emotions: Angry, Disgusted, Fearful, Happy, Sad, Surprised, Neutral
+Emotion Detection combines a real-time OpenCV pipeline with a Keras CNN classifier and a Flask web interface. The result is a polished demo that shows how image processing, deep learning, and web presentation can work together for an intuitive user experience.
 
-## Prerequisites
+## Key Features
 
-- Python 3.8 or higher
-- Webcam (built-in or external)
-- Git (for cloning the repository)
+- Real-time face detection and tracking using OpenCV
+- Emotion classification using a trained Keras CNN model
+- Live emoji overlay for each detected emotion
+- Responsive Flask web interface for easy interaction
+- Supports 7 emotions: Angry, Disgusted, Fearful, Happy, Sad, Surprised, Neutral
+
+## Visual Results
+
+### Model Training and Validation
+
+![Training loss curve](Pictures/LOSS CURVE.png)
+*Training loss and accuracy curves demonstrating model convergence during training.*
+
+![Validation performance curve](Pictures/VAL CURVE.png)
+*Validation accuracy curve highlighting generalization performance across epochs.*
+
+### Model Evaluation
+
+![Confusion matrix](Pictures/confusion.png)
+*Confusion matrix showing how the model performs across emotion categories and where misclassifications occur.*
+
+### Application Demo
+
+![Training loss curve](Pictures/LOSS CURVE.png)
+![Validation performance curve](Pictures/VAL CURVE.png)
+![Confusion matrix](Pictures/confusion.png)
+![Screenshot 18](Pictures/Screenshot (18).png)
+![Screenshot 2025-02-17 112235](Pictures/Screenshot 2025-02-17 112235.png)
+![Screenshot 2025-02-17 113450](Pictures/Screenshot 2025-02-17 113450.png)
+![Screenshot 2025-02-17 114045](Pictures/Screenshot 2025-02-17 114045.png)
+![Screenshot 2025-02-17 115734](Pictures/Screenshot 2025-02-17 115734.png)
+
+## Performance Summary
+
+- Training accuracy: ~84%
+- Validation accuracy: 78.78%
+- Test accuracy: 65.5%
+
+These curves show that the CNN model learns meaningful emotion features, but the drop in test accuracy indicates remaining challenges in real-world generalization, class balance, and dataset variation.
 
 ## Installation
 
@@ -44,92 +76,79 @@ A real-time emotion detection application that uses computer vision and deep lea
    pip install -r requirements.txt
    ```
 
-5. **Ensure model files are present:**
-   - The project includes `model.keras` (the trained emotion detection model)
-   - Emoji images should be in the `emoji/` directory
+5. **Verify required files:**
+   - `model.keras` should be available in the project root
+   - Emoji assets should be located in the `emoji/` folder
 
 ## Usage
 
-1. **Run the Flask application:**
+1. Start the Flask app:
    ```bash
    python app.py
    ```
 
-2. **Open your web browser and navigate to:**
+2. Open your browser and visit:
    ```
    http://localhost:5000
    ```
 
-3. **Click on "Open Camera" to start the emotion detection.**
+3. Click **Open Camera** to begin emotion detection.
 
-4. The application will:
-   - Access your webcam
-   - Detect faces in real-time
-   - Predict emotions using the deep learning model
-   - Overlay corresponding emojis on the video feed
+4. The app will:
+   - Access your webcam feed
+   - Detect faces in real time
+   - Classify expressions into seven emotions
+   - Display matching emojis on the stream
 
-## How It Works
+## Architecture
 
-### Architecture
+The system is composed of the following components:
 
-The application consists of several components:
+- **Face Detection:** OpenCV Haar cascades detect faces in each frame.
+- **Emotion Classification:** A CNN predicts one of seven emotions from the cropped face image.
+- **Emoji Overlay:** The predicted emotion triggers an emoji overlay on the video.
+- **Flask Web App:** A lightweight front end serves the live camera view and controls.
 
-1. **Face Detection:** Uses OpenCV's Haar cascade classifier to detect faces in the video stream.
-
-2. **Emotion Prediction:** A pre-trained Convolutional Neural Network (CNN) model built with Keras/TensorFlow analyzes facial expressions and classifies them into one of 7 emotions.
-
-3. **Emoji Overlay:** Based on the predicted emotion, the corresponding emoji image is overlaid on the video feed in the top-right corner.
-
-4. **Web Interface:** Flask serves a simple web page that displays the video stream with emotion detection.
-
-### Technical Details
-
-- **Model:** The emotion detection model is a Keras model saved in HDF5 format (`model.keras`).
-- **Face Detection:** Utilizes `haarcascade_frontalface_default.xml` from OpenCV for face detection.
-- **Emotions:** The model recognizes 7 basic emotions with corresponding emoji representations.
-- **Video Processing:** Real-time video capture and processing using OpenCV.
-- **Web Framework:** Flask for serving the web application.
-
-### Files Structure
+## File Structure
 
 ```
 emotion-detection/
 ├── app.py                 # Main Flask application
-├── gui.py                 # Desktop GUI version (optional)
-├── model.keras           # Trained emotion detection model
-├── class.keras           # Alternative model file
-├── requirements.txt      # Python dependencies
-├── emoji/                # Emoji images for each emotion
+├── gui.py                 # Optional desktop GUI version
+├── model.keras            # Trained emotion detection model
+├── class.keras            # Alternative model file
+├── requirements.txt       # Python dependencies
+├── emoji/                 # Emoji assets for each emotion
 ├── static/
 │   └── style/
-│       └── style.css     # CSS styles
+│       └── style.css      # CSS styles
 ├── templates/
-│   ├── index.html        # Main page
-│   └── open_camera.html  # Camera interface
-└── README.md             # This file
+│   ├── index.html         # Home page
+│   └── open_camera.html   # Camera interface
+└── README.md              # Project documentation
 ```
 
 ## Troubleshooting
 
-- **Camera not accessible:** Ensure your webcam is not being used by another application and that you have granted camera permissions.
-- **Model loading errors:** Verify that `model.keras` and emoji files are present in the correct directories.
-- **Import errors:** Make sure all dependencies are installed correctly in your virtual environment.
-- **Port already in use:** If port 5000 is busy, you can change the port in `app.py`.
+- **Camera unavailable:** Close other apps using the webcam and grant browser camera permissions.
+- **Model load failure:** Confirm `model.keras` exists and is not corrupted.
+- **Import errors:** Ensure the virtual environment is active and dependencies are installed.
+- **Port conflict:** Change the Flask port if `5000` is already in use.
 
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m 'Add feature'`
+4. Push to your branch: `git push origin feature/your-feature`
+5. Open a pull request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
 ## Acknowledgments
 
-- OpenCV for computer vision capabilities
-- Keras/TensorFlow for deep learning framework
-- Flask for web framework
+- OpenCV for computer vision support
+- Keras/TensorFlow for deep learning
+- Flask for the web interface
