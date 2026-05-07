@@ -18,27 +18,22 @@ Emotion Detection combines a real-time OpenCV pipeline with a Keras CNN classifi
 
 ### Model Training and Validation
 
-![Training loss curve](Pictures/LOSS CURVE.png)
-*Training loss and accuracy curves demonstrating model convergence during training.*
-
-![Validation performance curve](Pictures/VAL CURVE.png)
-*Validation accuracy curve highlighting generalization performance across epochs.*
+![Training loss curve](Pictures/LOSS%20CURVE.png)
+![Validation performance curve](Pictures/VAL%20CURVE.png)
 
 ### Model Evaluation
 
 ![Confusion matrix](Pictures/confusion.png)
-*Confusion matrix showing how the model performs across emotion categories and where misclassifications occur.*
 
 ### Application Demo
 
-![Training loss curve](Pictures/LOSS CURVE.png)
-![Validation performance curve](Pictures/VAL CURVE.png)
-![Confusion matrix](Pictures/confusion.png)
-![Screenshot 18](Pictures/Screenshot (18).png)
-![Screenshot 2025-02-17 112235](Pictures/Screenshot 2025-02-17 112235.png)
-![Screenshot 2025-02-17 113450](Pictures/Screenshot 2025-02-17 113450.png)
-![Screenshot 2025-02-17 114045](Pictures/Screenshot 2025-02-17 114045.png)
-![Screenshot 2025-02-17 115734](Pictures/Screenshot 2025-02-17 115734.png)
+![Screenshot 17](Pictures/Screenshot%20(17).png)
+![Screenshot 18](Pictures/Screenshot%20(18).png)
+![Screenshot 2025-02-17 111129](Pictures/Screenshot%202025-02-17%20111129.png)
+![Screenshot 2025-02-17 112235](Pictures/Screenshot%202025-02-17%20112235.png)
+![Screenshot 2025-02-17 113450](Pictures/Screenshot%202025-02-17%20113450.png)
+![Screenshot 2025-02-17 114045](Pictures/Screenshot%202025-02-17%20114045.png)
+![Screenshot 2025-02-17 115734](Pictures/Screenshot%202025-02-17%20115734.png)
 
 ## Performance Summary
 
